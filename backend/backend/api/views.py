@@ -44,7 +44,7 @@ list_of_products = [{
     }, 
     {
         "id": 5, 
-        "name": "Globe Deck",
+        "name": "Ass Deck",
         "header": "8.5 Globe Deck", 
         "full_description": "Globe Deck 8.5 size",
         "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
@@ -54,14 +54,57 @@ list_of_products = [{
     },
     {
         "id": 6, 
-        "name": "Globe Deck",
+        "name": "Ass Deck",
         "header": "8.5 Globe Deck", 
         "full_description": "Shit Cum",
         "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
         "category_id": "skate",
         "description_images": [""],
         "price": 300
-    }]
+    }, 
+        {
+        "id": 7, 
+        "name": "Ass Deck",
+        "header": "8.5 Globe Deck", 
+        "full_description": "Globe Deck 8.5 size",
+        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
+        "category_id": "skate",
+        "description_images": [""],
+        "price": 300
+    },
+    {
+        "id": 8, 
+        "name": "Ass Deck",
+        "header": "8.5 Globe Deck", 
+        "full_description": "Shit Cum",
+        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
+        "category_id": "skate",
+        "description_images": [""],
+        "price": 300
+    },
+    {
+        "id": 9, 
+        "name": "Bitch Deck",
+        "header": "8.5 Globe Deck", 
+        "full_description": "Globe Deck 8.5 size",
+        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
+        "category_id": "skate",
+        "description_images": [""],
+        "price": 300
+    },
+    {
+        "id": 10, 
+        "name": "Bitch Deck",
+        "header": "8.5 Globe Deck", 
+        "full_description": "Shit Cum",
+        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
+        "category_id": "skate",
+        "description_images": [""],
+        "price": 300
+    },
+    ]
+
+
 
 
 @api_view(["GET"])
