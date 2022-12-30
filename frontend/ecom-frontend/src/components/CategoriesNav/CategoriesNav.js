@@ -1,6 +1,6 @@
 
 
-const CategoriesNav = () => {
+const CategoriesNav = ({getAll, getFiltered}) => {
     return (        
     <nav className="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
         <div className="container-fluid">
@@ -11,16 +11,16 @@ const CategoriesNav = () => {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="#">All</a>
+                <a className="nav-link" aria-current="page" onClick={getAll}>All</a>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="#">Skate</a>
+                <a className="nav-link" aria-current="page" onClick={() => getFiltered("skate")}>Skate</a>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link" href="#">Auto</a>
+                <a className="nav-link" onClick={() => getFiltered("auto")}>Auto</a>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link">Clothing</a>
+                <a className="nav-link" onClick={() => getFiltered("clothing")}>Clothing</a>
                 </li>
             </ul>
             <form className="d-flex" role="search">

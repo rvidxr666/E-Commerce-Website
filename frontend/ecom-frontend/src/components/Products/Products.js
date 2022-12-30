@@ -9,10 +9,16 @@ const Products = () => {
 
     const [products, changeProducts] = useState([])
     const [currentPage, changeCurrentPage] = useState(1)
-    const productsPerPage = 8
+    const productsPerPage = 4
 
     const fetchAPI = async () => {
         var res = await axios.get("http://localhost:8000/products/")
+        changeProducts(res.data)
+    }
+
+    const fetchAPIFiltered = async (filter) => {
+        let req = {"filter": filter}
+        var res = await axios.post("http://localhost:8000/products/", req)
         changeProducts(res.data)
     }
 
@@ -45,7 +51,7 @@ const Products = () => {
         <>
         <Carousel />
         <div className="container">
-            <CategoriesNav />
+            <CategoriesNav getAll={fetchAPI} getFiltered={fetchAPIFiltered} />
             <div>
                 {  
                     currentPosts.map((product, index) => {
