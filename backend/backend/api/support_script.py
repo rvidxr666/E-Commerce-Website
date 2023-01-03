@@ -134,6 +134,9 @@ def delete_data(curr, conn):
     curr.execute(sql)
     conn.commit()
 
+    curr.execute("ALTER TABLE products AUTO_INCREMENT=1")
+    conn.commit()
+
     return "DELETED"
 
 

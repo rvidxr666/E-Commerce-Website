@@ -21,7 +21,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Homepage />}> </Route>
             <Route path="/products" element={<Products />}></Route>
-            <Route path="/products/skate/:id" element={<Product />}></Route>
+            <Route path="/products/:category_id/:id" element={<Product />}></Route>
           </Routes>
       </Router>
       <div style={{bottom:0}}>

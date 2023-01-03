@@ -9,6 +9,7 @@ from django.db import models
 
 
 class Products(models.Model):
+    product_id = models.IntegerField(primary_key=True)
     name = models.TextField(blank=True, null=True)
     header = models.TextField(blank=True, null=True)
     full_description = models.TextField(blank=True, null=True)

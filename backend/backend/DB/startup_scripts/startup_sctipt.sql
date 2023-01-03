@@ -4,7 +4,7 @@ GRANT ALL PRIVILEGES ON ecommerce.* TO 'ecomm_user'@'172.17.0.1' WITH GRANT OPTI
 -- 'ecomm_user'@'localhost'
 
 CREATE TABLE IF NOT EXISTS ecommerce.products (
-	id int NOT NULL AUTO_INCREMENT,
+	product_id int NOT NULL AUTO_INCREMENT,
     name TEXT,
     header TEXT,
     full_description TEXT,
@@ -12,5 +12,5 @@ CREATE TABLE IF NOT EXISTS ecommerce.products (
     category_id TEXT,
     price int,
     quantity int,
-    CONSTRAINT PRODUCT_ID PRIMARY KEY (id)
+    CONSTRAINT PRODUCT_ID PRIMARY KEY (product_id)
 );

@@ -3,121 +3,26 @@ from rest_framework.decorators import api_view
 from django.core import serializers
 from .models import Products
 import json
+from .history import History
 
 
-list_of_products = [{
-        "id": 1, 
-        "name": "Globe Deck",
-        "header": "8.5 Globe Deck", 
-        "full_description": "Globe Deck 8.5 size",
-        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
-        "category_id": "skate",
-        "description_images": [""],
-        "price": 300
-    }, 
-    {
-        "id": 2, 
-        "name": "Globe Deck",
-        "header": "8.5 Globe Deck", 
-        "full_description": "Globe Deck 8.5 size",
-        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
-        "category_id": "skate",
-        "description_images": [""],
-        "price": 300
-    }, 
-    {
-        "id": 3, 
-        "name": "Globe Deck",
-        "header": "8.5 Globe Deck", 
-        "full_description": "Globe Deck 8.5 size",
-        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
-        "category_id": "skate",
-        "description_images": [""],
-        "price": 300
-    }, 
-    {
-        "id": 4, 
-        "name": "Globe Deck",
-        "header": "8.5 Globe Deck", 
-        "full_description": "Globe Deck 8.5 size",
-        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
-        "category_id": "skate",
-        "description_images": [""],
-        "price": 300
-    }, 
-    {
-        "id": 5, 
-        "name": "Ass Deck",
-        "header": "8.5 Globe Deck", 
-        "full_description": "Globe Deck 8.5 size",
-        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
-        "category_id": "skate",
-        "description_images": [""],
-        "price": 300
-    },
-    {
-        "id": 6, 
-        "name": "Ass Deck",
-        "header": "8.5 Globe Deck", 
-        "full_description": "Shit Cum",
-        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
-        "category_id": "skate",
-        "description_images": [""],
-        "price": 300
-    }, 
-        {
-        "id": 7, 
-        "name": "Ass Deck",
-        "header": "8.5 Globe Deck", 
-        "full_description": "Globe Deck 8.5 size",
-        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
-        "category_id": "skate",
-        "description_images": [""],
-        "price": 300
-    },
-    {
-        "id": 8, 
-        "name": "Ass Deck",
-        "header": "8.5 Globe Deck", 
-        "full_description": "Shit Cum",
-        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
-        "category_id": "skate",
-        "description_images": [""],
-        "price": 300
-    },
-    {
-        "id": 9, 
-        "name": "Bitch Deck",
-        "header": "8.5 Globe Deck", 
-        "full_description": "Globe Deck 8.5 size",
-        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
-        "category_id": "skate",
-        "description_images": [""],
-        "price": 300
-    },
-    {
-        "id": 10, 
-        "name": "Bitch Deck",
-        "header": "8.5 Globe Deck", 
-        "full_description": "Shit Cum",
-        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
-        "category_id": "skate",
-        "description_images": [""],
-        "price": 300
-    },
-    ]
-
+def extractorFunc(elem):
+    pk = elem["pk"]
+    fields = elem["fields"]
+    fields["pk"] = pk
+    return fields
 
 def serializeOutput(lst_of_objects):
     json_obj = serializers.serialize("json", lst_of_objects)
     dic_obj = json.loads(json_obj)
-    final_json = [product["fields"] for product in dic_obj]
-    return final_json
+    merged_object = list(map(extractorFunc, dic_obj))
+    return merged_object
 
 
 @api_view(["GET", "POST"])
 def getProducts(request):
     if request.method == "POST":
+
         filt = json.loads(request.body.decode("utf-8"))["filter"]
         filtered_products = serializeOutput(Products.objects.filter(category_id=filt))
         print(filt, "\n", filtered_products)
@@ -130,5 +35,19 @@ def getProducts(request):
 @api_view(["GET"])
 def getProduct(request, **kwargs):
     id = kwargs.get("id")
-    requested_elem = list(filter(lambda x: x["id"] == id, list_of_products))
-    return Response(requested_elem)
+    product = serializeOutput([Products.objects.get(pk=id)])
+    History(request).add(id)
+    print("Get Product", request.session.get("history"))
+    print("Session key", request.session.session_key)
+    return Response(product)
+
+@api_view(["GET"])
+def getViewedProducts(request):
+    history = request.session.get("history")
+    print("getViewed", history)
+    if not history:
+        return Response([{"category_id": "", "header_image":"", "pk":""}])
+    
+    viewed_products = Products.objects.filter(pk__in=history)
+    viewed_products_json = serializeOutput(viewed_products)
+    return Response(viewed_products_json)

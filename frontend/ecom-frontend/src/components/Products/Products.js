@@ -20,6 +20,7 @@ const Products = () => {
         let req = {"filter": filter}
         var res = await axios.post("http://localhost:8000/products/", req)
         changeProducts(res.data)
+        changeCurrentPage(1)
     }
 
     const switchPage = (num) => {

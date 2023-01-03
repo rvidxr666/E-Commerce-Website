@@ -3,6 +3,7 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.getProducts),
-    path('<int:id>/', views.getProduct)
+    path('products/', views.getProducts),
+    path('products/<int:id>/', views.getProduct),
+    path('products/history', views.getViewedProducts)
 ]
