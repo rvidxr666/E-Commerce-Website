@@ -31,19 +31,20 @@ const Product = (props) => {
 
     const getProduct = async () => {
       let resp = await axios.get(`http://localhost:8000/products/${id}/`, {'withCredentials': true })
-      updateThisProduct(resp.data)
+      updateThisProduct(resp.data.product)
+      modifyViewedProducts(resp.data.viewedProducts)
     }
 
-    const getViewedProducts = async () => {
-      let resp = await axios.get(`http://localhost:8000/products/history`, {'withCredentials': true })
-      console.log(resp.data)
-      modifyViewedProducts(resp.data)
-      // console.log(viewedProducts)
-    }
+    // const getViewedProducts = async () => {
+    //   let resp = await axios.get(`http://localhost:8000/products/history`, {'withCredentials': true })
+    //   console.log(resp.data)
+    //   modifyViewedProducts(resp.data)
+    //   // console.log(viewedProducts)
+    // }
 
     useEffect(() => {
-      getViewedProducts()
       getProduct()
+      window.scrollTo(0, 0)
     }, [prod_id])
 
     const setQuantityOnChange = (event) => {
@@ -59,9 +60,14 @@ const Product = (props) => {
       if (viewedProducts.length === 1 && Object.values(viewedProducts[0]).filter(x => x === "").length === Object.keys(viewedProducts[0]).length) {
         return <h4>No Items</h4>
       } else {
-        return <Link state={product} to={`/products/${product.category_id}/${product.pk}`}>
-                  <img src={`${product.header_image}`} className="img-fluid" alt=""/>
-                </Link>
+        return (  
+                  <div class="col mb-4 text-center">
+                    <Link state={product} to={`/products/${product.category_id}/${product.pk}`}>
+                    <img width="300" height="300" src={`${product.header_image}`} className="img-fluid" alt=""/>
+                    <h5 style={{"color":"#2F4F4F"}} className="mt-2 lead font-weight-bold">{product.name}</h5>
+                    </Link>
+                  </div>
+                )
       }
     }
 
@@ -77,9 +83,9 @@ const Product = (props) => {
     
             <div className="col-md-6 mb-4">
               <div className="p-4">
-    
+              <p className="lead font-weight-bold"><b>{thisProduct[0].name}</b></p>
                 <div className="mb-3">
-                  <a href="">
+                  <a href=""> {/* Implement Redirect to the filter */}
                     <span className="badge purple mr-1">{thisProduct[0].category_id}</span>
                   </a>
                 </div>
@@ -88,11 +94,11 @@ const Product = (props) => {
                   <span>${thisProduct[0].price}</span>
                 </p>
     
-                <p className="lead font-weight-bold">Description</p>
+                <p className="lead font-weight-bold mt-4">Description</p>
     
                 <p>{thisProduct[0].full_description}</p>
     
-                <form className="d-flex justify-content-left">
+                <form className="d-flex justify-content-left mt-4">
                   <input onChange={setQuantityOnChange} value={quantity} type="number" aria-label="Search" className="form-control" style={{"width":"100px"}}/>
                   <button className="btn btn-primary btn-md my-0 p" type="submit">Add to cart</button>
                 </form>
@@ -118,9 +124,7 @@ const Product = (props) => {
 
         <div class="row wow fadeIn mt-4">
           <h4 className="my-4 h4 text-center">Recently Viewed</h4>
-          <div class="col-lg-4 col-md-12 mb-4">
             {viewedProducts.map(product => displayViewedProducts(product))}
-          </div>
         </div>
 
       </div>

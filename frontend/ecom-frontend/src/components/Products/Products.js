@@ -83,4 +83,5 @@ const renderedProducts = (products) => {
 
 }
 
+
 export default Products;
