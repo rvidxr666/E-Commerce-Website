@@ -17,18 +17,17 @@ class History:
         
         history_len = len(self.session["history"])
         if history_len > 5:
-            self.session["history"] = self.session["history"][history_len-6:]
-
+            self.session["history"] = self.session["history"][:6]
         self.session.modified = True
     
-    def getViewedProducts(self, request):
-        history = request.session.get("history")
+    def getViewedProducts(self):
+        history = self.session.get("history")
+
         if not history:
-            return [{"category_id": "", "header_image":"", "pk":""}]
+            return None
         
         viewed_products = [Products.objects.filter(pk=id)[0] for id in history][1:]
-        viewed_products_json = self.serializeOutput(viewed_products)
-        return viewed_products_json
+        return viewed_products
 
 
 

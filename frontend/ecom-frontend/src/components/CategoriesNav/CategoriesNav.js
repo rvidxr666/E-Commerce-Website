@@ -1,6 +1,6 @@
 
 
-const CategoriesNav = ({getAll, getFiltered}) => {
+const CategoriesNav = ({getAll, getFiltered, getFilteredTest}) => {
     return (        
     <nav className="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
         <div className="container-fluid">
@@ -14,16 +14,16 @@ const CategoriesNav = ({getAll, getFiltered}) => {
                 <a className="nav-link" aria-current="page" onClick={getAll}>All</a>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link" aria-current="page" onClick={() => getFiltered("skate")}>Skate</a>
+                <a className="nav-link" name="skate" aria-current="page" onClick={(e) => getFilteredTest(e, "category_id")}>Skate</a>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link" onClick={() => getFiltered("auto")}>Auto</a>
+                <a className="nav-link" name="auto" onClick={(e) => getFilteredTest(e, "category_id")}>Auto</a>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link" onClick={() => getFiltered("clothing")}>Clothing</a>
+                <a className="nav-link" name="clothing" onClick={(e) => getFilteredTest(e, "category_id")}>Clothing</a>
                 </li>
             </ul>
-            <form className="d-flex" role="search">
+            <form onSubmit={(e) => getFilteredTest(e, "name")} className="d-flex" role="search">
                 <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                 <button className="btn btn-outline-success" type="submit">Search</button>
             </form>

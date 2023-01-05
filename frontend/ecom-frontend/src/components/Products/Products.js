@@ -16,6 +16,22 @@ const Products = () => {
         changeProducts(res.data)
     }
 
+    const fetchAPIFilteredTest = async (e, filter) => {
+        e.preventDefault()
+
+        if (filter === "name") {
+            console.log(e)
+            var filter_value = e.target[0].value
+            var res = await axios.get(`http://localhost:8000/products?${filter}=${filter_value}`)
+        } else {
+            filter_value = e.target.name
+            var res = await axios.get(`http://localhost:8000/products?${filter}=${filter_value}`)
+        }
+
+        changeProducts(res.data)
+        changeCurrentPage(1)
+    }
+
     const fetchAPIFiltered = async (filter) => {
         let req = {"filter": filter}
         var res = await axios.post("http://localhost:8000/products/", req)
@@ -52,7 +68,7 @@ const Products = () => {
         <>
         <Carousel />
         <div className="container">
-            <CategoriesNav getAll={fetchAPI} getFiltered={fetchAPIFiltered} />
+            <CategoriesNav getAll={fetchAPI} getFiltered={fetchAPIFiltered} getFilteredTest={fetchAPIFilteredTest}/>
             <div>
                 {  
                     currentPosts.map((product, index) => {
