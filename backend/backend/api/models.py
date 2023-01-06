@@ -19,5 +19,16 @@ class Products(models.Model):
     quantity = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'products'
+
+class Categories(models.Model):
+    category = models.TextField(primary_key=True, max_length=64)
+    description = models.TextField(blank=True, null=True)
+    picture_url = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'categories'
+
+

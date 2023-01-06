@@ -104,6 +104,28 @@ data = [{
 ]
 
 
+categories = [
+                (
+                    "skate", 
+                    "Skate Boarding Gear",
+                    "https://i.guim.co.uk/img/media/beb8ffcaefcecc9b9b25bd8b0db545d9f8aef61d/200_0_6648_3990/master/6648.jpg?width=1200&quality=85&auto=format&fit=max&s=65554f88940a4a6ed1ac498997346f51"
+                ), 
+
+                (
+                    "auto", 
+                    "Auto Parts",
+                    "https://www.bentleymotors.com/content/dam/bentley/Master/World%20of%20Bentley/Mulliner/redesign/coachbuilt/Mulliner%20Batur%201920x1080.jpg/_jcr_content/renditions/original.image_file.1920.1080.file/Mulliner%20Batur%201920x1080.jpg"
+                ), 
+
+                (
+                    "clothing",
+                    "Clothes",
+                    "https://blog.japanwondertravel.com/wp-content/uploads/2021/10/Japanese-clothing-store.jpg"
+                )
+    
+             ]
+
+
 def create_connection():
 
     conn = cn.connect(
@@ -139,10 +161,24 @@ def delete_data(curr, conn):
 
     return "DELETED"
 
+def insert_categories(curr, conn):
+    sql = "INSERT INTO categories (category, description, picture_url) VALUES (%s, %s, %s)"
+    curr.executemany(sql, categories)
+    conn.commit()
+    return "ADDED CATEGORIES"
+
+def delete_categories(curr, conn):
+    sql = "DELETE FROM categories"
+    curr.execute(sql)
+    conn.commit()
+    return "DELETED CATEGORIES"
+
+
 
 
 
 if __name__ == "__main__":
     conn, curr = create_connection()
-    status = insert_data(curr, conn)
+    print(insert_data(curr, conn))
+    print(insert_categories(curr, conn))
     # delete_data(curr, conn)

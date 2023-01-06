@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useNavigate} from 'react';
+import { useLocation } from "react-router-dom";
 import ProductHeading from './ProductHeading.js';
 import Carousel from '../Carousel/Carousel.js';
 import CategoriesNav from '../CategoriesNav/CategoriesNav.js';
@@ -10,6 +11,10 @@ const Products = () => {
     const [products, changeProducts] = useState([])
     const [currentPage, changeCurrentPage] = useState(1)
     const productsPerPage = 4
+
+    const query = new URLSearchParams(useLocation().search);
+    console.log(query.get("id"));
+    console.log(query.get("artist"));
 
     const fetchAPI = async () => {
         var res = await axios.get("http://localhost:8000/products/")
@@ -32,12 +37,12 @@ const Products = () => {
         changeCurrentPage(1)
     }
 
-    const fetchAPIFiltered = async (filter) => {
-        let req = {"filter": filter}
-        var res = await axios.post("http://localhost:8000/products/", req)
-        changeProducts(res.data)
-        changeCurrentPage(1)
-    }
+    // const fetchAPIFiltered = async (filter) => {
+    //     let req = {"filter": filter}
+    //     var res = await axios.post("http://localhost:8000/products/", req)
+    //     changeProducts(res.data)
+    //     changeCurrentPage(1)
+    // }
 
     const switchPage = (num) => {
         changeCurrentPage(num)
@@ -68,7 +73,7 @@ const Products = () => {
         <>
         <Carousel />
         <div className="container">
-            <CategoriesNav getAll={fetchAPI} getFiltered={fetchAPIFiltered} getFilteredTest={fetchAPIFilteredTest}/>
+            <CategoriesNav getAll={fetchAPI} getFilteredTest={fetchAPIFilteredTest}/>
             <div>
                 {  
                     currentPosts.map((product, index) => {

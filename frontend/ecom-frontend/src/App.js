@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar/Navbar.js"
 import Homepage from "./components/Home/Homepage.js"
 import Products from "./components/Products/Products.js";
 import Product from "./components/Products/Product.js";
+import Categories from "./components/Categories/Categories"
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/" element={<Homepage />}> </Route>
             <Route path="/products" element={<Products />}></Route>
             <Route path="/products/:category_id/:id" element={<Product />}></Route>
+            <Route path="/categories" element={<Categories/>}></Route>
           </Routes>
       </Router>
       <div style={{bottom:0}}>

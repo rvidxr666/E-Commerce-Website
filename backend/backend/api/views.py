@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.core import serializers
-from .models import Products
+from .models import Products, Categories
 import json
 from .history import History
 from .processor import Processor
@@ -38,5 +38,11 @@ def getProduct(request, **kwargs):
         serialized_products = [{"category_id": "", "header_image":"", "pk":""}]
 
     return Response({"product":product, "viewedProducts":serialized_products})
+
+
+@api_view(["GET"])
+def get_categories(request):
+    categories = Processor.serializeOutput(Categories.objects.all())
+    return Response(categories)
 
 

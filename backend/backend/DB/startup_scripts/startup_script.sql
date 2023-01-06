@@ -14,3 +14,11 @@ CREATE TABLE IF NOT EXISTS ecommerce.products (
     quantity int,
     CONSTRAINT PRODUCT_ID PRIMARY KEY (product_id)
 );
+
+
+CREATE TABLE IF NOT EXISTS ecommerce.categories (
+    category VARCHAR(64) NOT NULL ,
+    description TEXT,
+    picture_url TEXT, 
+    CONSTRAINT CATEGORY_NAME PRIMARY KEY (category)
+);
