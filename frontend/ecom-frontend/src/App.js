@@ -4,6 +4,7 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import './mdb.css'
 import './App.css'
 import './style.css'
+import { v4 as uuidv4 } from 'uuid';
 
 
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
@@ -12,6 +13,7 @@ import Homepage from "./components/Home/Homepage.js"
 import Products from "./components/Products/Products.js";
 import Product from "./components/Products/Product.js";
 import Categories from "./components/Categories/Categories"
+import ShoppingCart from "./components/Cart/ShoppingCart"
 
 
 function App() {
@@ -21,9 +23,10 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Homepage />}> </Route>
-            <Route path="/products" element={<Products />}></Route>
+            <Route path="/products" element={<Products key={uuidv4()} />}></Route>
             <Route path="/products/:category_id/:id" element={<Product />}></Route>
             <Route path="/categories" element={<Categories/>}></Route>
+            <Route path="/cart" element={<ShoppingCart/>}></Route>
           </Routes>
       </Router>
       <div style={{bottom:0}}>

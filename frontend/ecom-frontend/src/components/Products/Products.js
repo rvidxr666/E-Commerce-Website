@@ -13,36 +13,26 @@ const Products = () => {
     const productsPerPage = 4
 
     const query = new URLSearchParams(useLocation().search);
-    console.log(query.get("id"));
-    console.log(query.get("artist"));
+
+    const filter_name = query.get("filter")
+    const filter_val = query.get("value");
 
     const fetchAPI = async () => {
         var res = await axios.get("http://localhost:8000/products/")
         changeProducts(res.data)
     }
 
-    const fetchAPIFilteredTest = async (e, filter) => {
-        e.preventDefault()
+    const fetchAPIFilteredTest = async (filter_name, filter_value) => {
 
-        if (filter === "name") {
-            console.log(e)
-            var filter_value = e.target[0].value
-            var res = await axios.get(`http://localhost:8000/products?${filter}=${filter_value}`)
+        if (filter_name === "name") {
+            var res = await axios.get(`http://localhost:8000/products?${filter_name}=${filter_value}`)
         } else {
-            filter_value = e.target.name
-            var res = await axios.get(`http://localhost:8000/products?${filter}=${filter_value}`)
+            var res = await axios.get(`http://localhost:8000/products?${filter_name}=${filter_value}`)
         }
 
         changeProducts(res.data)
         changeCurrentPage(1)
     }
-
-    // const fetchAPIFiltered = async (filter) => {
-    //     let req = {"filter": filter}
-    //     var res = await axios.post("http://localhost:8000/products/", req)
-    //     changeProducts(res.data)
-    //     changeCurrentPage(1)
-    // }
 
     const switchPage = (num) => {
         changeCurrentPage(num)
@@ -60,9 +50,16 @@ const Products = () => {
         }
      }
 
+    // whenever filter is changed
     useEffect(() => {
-        fetchAPI()
-    }, [])
+        if (filter_name != null && filter_val != null) {
+            var filter = query.get("filter")
+            var filter_value = query.get("value")
+            fetchAPIFilteredTest(filter, filter_value)
+        } else {
+            fetchAPI()
+        }
+    }, [filter_val])
 
     const lastItemIndex = productsPerPage * currentPage
     const firstItemIndex = lastItemIndex - productsPerPage

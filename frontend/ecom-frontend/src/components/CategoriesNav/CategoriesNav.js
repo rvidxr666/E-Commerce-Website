@@ -1,6 +1,6 @@
+import {Link} from 'react-router-dom';
 
-
-const CategoriesNav = ({getAll, getFiltered, getFilteredTest}) => {
+const CategoriesNav = ({getAll, getFiltered, getFilteredTest, updatePage}) => {
     return (        
     <nav className="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
         <div className="container-fluid">
@@ -11,19 +11,19 @@ const CategoriesNav = ({getAll, getFiltered, getFilteredTest}) => {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                <a className="nav-link" aria-current="page" onClick={getAll}>All</a>
+                <Link className="nav-link" aria-current="page" to={"/products"} onClick={getAll}>All</Link>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link" name="skate" aria-current="page" onClick={(e) => getFilteredTest(e, "category_id")}>Skate</a>
+                <Link className="nav-link" name="skate" aria-current="page" to={"/products?filter=category_id&value=skate"}>Skate</Link>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link" name="auto" onClick={(e) => getFilteredTest(e, "category_id")}>Auto</a>
+                <Link className="nav-link" name="auto" to={"/products?filter=category_id&value=auto"}>Auto</Link>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link" name="clothing" onClick={(e) => getFilteredTest(e, "category_id")}>Clothing</a>
+                <Link className="nav-link" name="clothing" to={"/products?filter=category_id&value=clothing"}>Clothing</Link>
                 </li>
             </ul>
-            <form onSubmit={(e) => getFilteredTest(e, "name")} className="d-flex" role="search">
+            <form onSubmit={(e) => {e.preventDefault(); getFilteredTest("name", e.target[0].value)}} className="d-flex" role="search">
                 <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                 <button className="btn btn-outline-success" type="submit">Search</button>
             </form>

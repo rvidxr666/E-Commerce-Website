@@ -16,7 +16,8 @@ const Product = (props) => {
           "category_id":"",
           "price":0,
           "quantity":0,
-          "pk":0
+          "pk":0, 
+          "quantity": 0
         }
       ])
     
@@ -24,23 +25,21 @@ const Product = (props) => {
     const params = useParams();
     const prod_id = params.id
 
-    const location = useLocation()
-    const state = location.state
-    const id = state.pk
+    // const location = useLocation()
+    // const state = location.state
+    const addToCart = async (e) => {
+      e.preventDefault();
+      var quantiy = e.target[0].value
+      var request = {"id": prod_id, "quantity": quantiy}
+      var resp = await axios.post(`http://localhost:8000/cart`, request)
+    }
 
 
     const getProduct = async () => {
-      let resp = await axios.get(`http://localhost:8000/products/${id}/`, {'withCredentials': true })
+      let resp = await axios.get(`http://localhost:8000/products/${prod_id}/`, {'withCredentials': true })
       updateThisProduct(resp.data.product)
       modifyViewedProducts(resp.data.viewedProducts)
     }
-
-    // const getViewedProducts = async () => {
-    //   let resp = await axios.get(`http://localhost:8000/products/history`, {'withCredentials': true })
-    //   console.log(resp.data)
-    //   modifyViewedProducts(resp.data)
-    //   // console.log(viewedProducts)
-    // }
 
     useEffect(() => {
       getProduct()
@@ -51,7 +50,9 @@ const Product = (props) => {
       if (event.target.value <= 0){
         setQuantity(1)
       }
-      else {
+      else if (event.target.value >= thisProduct[0].quantity)  {
+        setQuantity(thisProduct[0].quantity)
+      } else {
         setQuantity(event.target.value)
       }
     }
@@ -98,7 +99,7 @@ const Product = (props) => {
     
                 <p>{thisProduct[0].full_description}</p>
     
-                <form className="d-flex justify-content-left mt-4">
+                <form className="d-flex justify-content-left mt-4" onSubmit={addToCart}>
                   <input onChange={setQuantityOnChange} value={quantity} type="number" aria-label="Search" className="form-control" style={{"width":"100px"}}/>
                   <button className="btn btn-primary btn-md my-0 p" type="submit">Add to cart</button>
                 </form>

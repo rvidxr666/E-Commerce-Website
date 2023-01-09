@@ -86,7 +86,7 @@ data = [{
         "name": "Bitch Deck",
         "header": "8.5 Globe Deck", 
         "full_description": "Globe Deck 8.5 size",
-        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
+        "header_image": "https://www.autopart.pl/images/catalog-category-big//catalog/category/27/7_5eafd8babd2d62_52116473.png.png",
         "category_id": "auto",
         "price": 300,
         "quantity": 3
@@ -120,6 +120,12 @@ categories = [
                 (
                     "clothing",
                     "Clothes",
+                    "https://blog.japanwondertravel.com/wp-content/uploads/2021/10/Japanese-clothing-store.jpg"
+                ), 
+
+                (
+                    "random",
+                    "random",
                     "https://blog.japanwondertravel.com/wp-content/uploads/2021/10/Japanese-clothing-store.jpg"
                 )
     
@@ -180,5 +186,6 @@ def delete_categories(curr, conn):
 if __name__ == "__main__":
     conn, curr = create_connection()
     print(insert_data(curr, conn))
-    print(insert_categories(curr, conn))
+    # print(insert_categories(curr, conn))
     # delete_data(curr, conn)
+    # print(delete_categories(curr, conn))

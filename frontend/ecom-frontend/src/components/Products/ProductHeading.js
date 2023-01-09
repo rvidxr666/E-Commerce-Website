@@ -7,7 +7,7 @@ const ProductHeading = ({product}) => {
         <div className="card">
 
           <div className="view overlay">
-            <img src={product.header_image} className="card-img-top" alt=""/>
+            <img src={product.header_image} height="400px" className="card-img-top" alt=""/>
             <Link state={product} to={`/products/${product.category_id}/${product.pk}`}>
               <div className="mask rgba-white-slight waves-effect waves-light"></div>
             </Link>
