@@ -64,7 +64,7 @@ const Product = (props) => {
         return (  
                   <div class="col mb-4 text-center">
                     <Link state={product} to={`/products/${product.category_id}/${product.pk}`}>
-                    <img width="300" height="300" src={`${product.header_image}`} className="img-fluid" alt=""/>
+                    <img width="500" height="500" src={`${product.header_image}`} className="img-fluid" alt=""/>
                     <h5 style={{"color":"#2F4F4F"}} className="mt-2 lead font-weight-bold">{product.name}</h5>
                     </Link>
                   </div>

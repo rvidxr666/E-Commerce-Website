@@ -2,7 +2,6 @@ from .processor import Processor
 
 class Cart:
     def __init__(self, request):
-
         self.session = request.session
 
         if not self.session.get("shopping_cart"):
@@ -19,21 +18,34 @@ class Cart:
         self.session.modified = True
     
     def remove(self, id):
-        self.cart = filter(lambda x: x["pk"]!= id, self.cart)
+        for i in range(len(self.cart)):
+            if self.cart[i]["pk"] == id:
+                self.cart.pop(i)
+                self.session.modified = True
+                break
+
+
+        print("self.cart ", self.cart)
         self.session.modified = True
 
     def get_cart_ids(self):
         ids = list(map(lambda x: x["pk"], self.cart))
         return ids
     
-    def replace_existing(self, cart_product):
-        target_id = cart_product["pk"]
-
+    def replace_existing(self, target_id, cart_quantity):
+        print("self_cart", self.cart)
         for i in range(len(self.cart)):
-            if self.cart[i]["pk"]== target_id:
-               self.cart[i] = cart_product
+            if self.cart[i]["pk"] == target_id:        
+               self.cart[i]["cart_quantity"] = cart_quantity
                break
         
+        self.session.modified = True
+    
+    def cart_sum(self):
+        sm = 0
+        for i in range(len(self.cart)):
+            sm += (int(self.cart[i]["price"])*int(self.cart[i]["cart_quantity"])) 
+        return sm
 
     
 

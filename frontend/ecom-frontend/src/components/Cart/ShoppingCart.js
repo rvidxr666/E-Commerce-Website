@@ -5,10 +5,29 @@ import CartPosition from './CartPosition';
 const ShoppingCart = () => {
 
     const [cartProducts, changeCartProducts] = useState([])
+    const [cartSum, changeCartSum] = useState(0)
       
     const fetchAPI = async () => {
         var resp = await axios.get("http://localhost:8000/cart")
-        changeCartProducts(resp.data)
+        changeCartProducts(resp.data.cart_products)
+        changeCartSum(resp.data.cart_sum)
+    }
+
+    const refrestPage = () => {
+        window.location.reload(false);
+    }
+
+    const onDelete = async (e, id) => {
+        e.preventDefault();
+        await axios.delete(`http://localhost:8000/cart/${id}`)
+        refrestPage()
+        // changeCartProducts(resp.data.cart_products)
+    }
+
+    const changeSum = async (id, cartQuantity) => {
+        var req = {"id":id, "quantity":cartQuantity}
+        await axios.put(`http://localhost:8000/cart/${id}`, req)
+        refrestPage()
     }
 
     useEffect(() => {
@@ -29,7 +48,7 @@ const ShoppingCart = () => {
             </div>
             {cartProducts.map((product, i) => {
                 return (
-                        <CartPosition product={product} />
+                        <CartPosition product={product} deleteFunction={onDelete} changeSum={changeSum} />
                     
                     // <div className="ms-2 me-2 mt-4 row align-items-center position-relative" style={{"box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"}}>
                     //     <img width="20" height="200" src={"https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920"} class="col-2 pe-4" alt="..."/>
@@ -48,12 +67,10 @@ const ShoppingCart = () => {
                 )
             })}
 
-            <div className="row position-relative" style={{"padding-top": "80px", "padding-bottom": "40px"}}>
-                    <button className="btn btn-primary position-absolute bottom-0 end-0" type="button">Calculate Total</button>      
-            </div>
+            <div className="row" style={{"paddingTop": "20px", "paddingBottom": "15px"}}>Cart Sum: {cartSum}$</div>
 
             <div className="row position-relative" style={{"padding-top": "15px", "padding-bottom": "40px"}}>
-                    <button className="btn btn-success position-absolute bottom-0 end-0" type="button">Checkout</button>      
+                <button className="btn btn-success position-absolute bottom-0 end-0" type="button">Checkout</button>      
             </div>
 
 

@@ -22,3 +22,15 @@ CREATE TABLE IF NOT EXISTS ecommerce.categories (
     picture_url TEXT, 
     CONSTRAINT CATEGORY_NAME PRIMARY KEY (category)
 );
+
+
+CREATE TABLE IF NOT EXISTS ecommerce.users (
+    email VARCHAR(64) NOT NULL ,
+    name TEXT,
+    surname TEXT,
+    password TEXT, 
+    gender CHAR,
+    finance INT, 
+    birth_date DATE,
+    CONSTRAINT CATEGORY_NAME PRIMARY KEY (email)
+);

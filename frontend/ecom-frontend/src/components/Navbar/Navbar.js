@@ -1,7 +1,47 @@
 import {Link} from 'react-router-dom'
-
+import React, {useState} from 'react';
+import axios from 'axios';
 
 const Navbar = () => {
+
+    const [loggedStatus, changeLoggedStatus] = useState("")
+
+    const logout = async () => {
+      await axios.get("http://localhost:8000/logout")
+      window.location.reload(false);
+    }
+
+    const checkLoggesStatus = async () => {
+      let resp = await axios.get("http://localhost:8000/check-session")
+      let status = resp.data.data
+
+      if (status === "logged") {
+        changeLoggedStatus("logged")
+      }
+    }
+
+    checkLoggesStatus()
+
+    const modifyNavbar = () => {
+      if (loggedStatus === "") {
+        return (
+          <li className="nav-item">
+            <Link className="nav-link" aria-current="page" to={"/login"}>Login</Link>
+          </li>
+        )
+      } else {
+        return (
+          <>
+          <li className="nav-item">
+            <Link className="nav-link" aria-current="page" to={"/profile"}>Profile</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" onClick={logout} aria-current="page" >Logout</Link>
+          </li>
+          </>
+        )
+      }
+    }
 
     return (
         <nav className="navbar navbar-dark navbar-expand-lg bg-dark">
@@ -24,9 +64,7 @@ const Navbar = () => {
             </ul>
 
             <ul className="navbar-nav align-self-end mb-2 mb-lg-0">
-              <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="#">Login</a>
-              </li>
+              {modifyNavbar()}
               <li className="nav-item">
                 <Link className="nav-link" to={"/cart"}>Cart</Link>
               </li>

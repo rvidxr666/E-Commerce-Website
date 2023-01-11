@@ -32,3 +32,16 @@ class Categories(models.Model):
         db_table = 'categories'
 
 
+class Users(models.Model):
+    email = models.TextField(primary_key=True, max_length=64)
+    name = models.TextField(blank=True, null=True)
+    surname = models.TextField(blank=True, null=True)
+    password = models.TextField(blank=True, null=True)
+    finance = models.IntegerField(null=True, blank=True)
+    gender = models.CharField(blank=True, null=True, max_length=1)
+    birth_date = models.DateField(null=True, blank=True)
+
+    class Meta:
+        managed = True
+        db_table = 'users'
+

@@ -41,3 +41,12 @@ class Processor:
 
         print([obj["name"] for obj in serialized_objects])
         return serialized_objects
+
+    @staticmethod
+    def instantiate_session(request):
+        if not request.session or not request.session.session_key:
+            request.session.save()
+            session_key = request.session.session_key
+            return session_key
+        
+        return request.session.session_key
