@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom'
-import React, {useState} from 'react';
+import React, {useState ,useEffect} from 'react';
 import axios from 'axios';
 
 const Navbar = () => {
@@ -20,7 +20,9 @@ const Navbar = () => {
       }
     }
 
-    checkLoggesStatus()
+    useEffect(() => {
+      checkLoggesStatus()
+    }, [])
 
     const modifyNavbar = () => {
       if (loggedStatus === "") {

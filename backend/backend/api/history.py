@@ -3,7 +3,6 @@ from .models import Products
 class History:
     def __init__(self, request):
         self.session = request.session
-        self.session_key = request.session_key
         self._history_init()
 
     def _history_init(self):

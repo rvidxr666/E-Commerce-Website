@@ -27,7 +27,6 @@ def getProducts(request):
 
 @api_view(["GET"])
 def getProduct(request, **kwargs):
-    print(Processor.instantiate_session(request))
     id = kwargs.get("id")
     product = Processor.serializeOutput([Products.objects.get(pk=id)])
 
@@ -163,6 +162,20 @@ def check_session(request):
         return Response({"data":"logged"}, status=status.HTTP_200_OK)
     else:
         return Response({"data":"unlogged"}, status=status.HTTP_200_OK)
+
+
+@api_view(["GET"])
+def get_user(request):
+    user_email = request.session.get("user_email")
+
+    if user_email:
+        user = Users.objects.get(pk=user_email)
+        user_serialized = Processor.serializeOutput([user])[0]
+        print(user_serialized)
+        return Response({"data":user_serialized})
+    
+    else:
+        return Response({"data":"invalid"})
 
 
 
