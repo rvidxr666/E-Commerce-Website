@@ -2,11 +2,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 from django.core import serializers
-from .models import Products, Categories, Users
+from .models import Products, Categories, Users, Transactions
 import json
 from .history import History
 from .processor import Processor
 from .cart import Cart, CartProduct
+import datetime
 
 
 @api_view(["GET", "POST"])
@@ -176,6 +177,66 @@ def get_user(request):
     
     else:
         return Response({"data":"invalid"})
+
+@api_view(["POST"])
+def edit_user(request):
+
+    request_data = request.data
+    user = Users.objects.get(pk=request.session["user_email"])
+
+    user.name = request_data.get("name") if request_data.get("name") else user.name
+    user.surname = request_data.get("surname") if request_data.get("surname") else user.surname
+    user.birth_date = request_data.get("birth_date") if request_data.get("birth_date") else user.birth_date
+    user.finance = int(request_data.get("finance")) + user.finance if request_data.get("finance") else user.finance
+    user.save()
+
+    return Response({"data":"OK"})
+
+
+@api_view(["GET"])
+def checkout(request):
+    cart = Cart(request)
+    cart_objects = cart.cart
+
+    user = Users.objects.get(pk=request.session["user_email"])
+    timestamp = datetime.datetime.now()
+
+    if user.finance < cart.cart_sum():
+        Processor.create_transactions(
+                                        cart_objects=cart_objects, 
+                                        timestamp=timestamp, 
+                                        status="rejected", 
+                                        user_email=request.session["user_email"]
+                                      )
+        print("rejected")
+        return Response({"data": "insufficient funds"})
+    
+    Processor.create_transactions(
+                                  cart_objects=cart_objects, 
+                                  timestamp=timestamp, 
+                                  status="accepted", 
+                                  user_email=request.session["user_email"]
+                                  )
+
+    user.finance = user.finance - cart.cart_sum()
+    user.save()
+    
+    cart.empty_cart()
+    return Response({"data": "success"})
+
+
+
+
+
+# CREATE TABLE IF NOT EXISTS ecommerce.transactions (
+#     transaction_id int NOT NULL AUTO_INCREMENT,
+#     user_email TEXT,
+#     product_id INT,
+#     timestamp TIMESTAMP,
+#     quantity INT, 
+#     status TEXT,
+#     CONSTRAINT TRANSACTION_KEY PRIMARY KEY (transaction_id)
+# );
 
 
 

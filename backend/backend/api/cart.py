@@ -47,6 +47,11 @@ class Cart:
             sm += (int(self.cart[i]["price"])*int(self.cart[i]["cart_quantity"])) 
         return sm
 
+    def empty_cart(self):
+        del self.session["shopping_cart"]
+        self.session.modified = True
+
+
     
 
 class CartProduct:

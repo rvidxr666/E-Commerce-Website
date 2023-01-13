@@ -1,6 +1,6 @@
 from django.core import serializers
 import json
-from .models import Products
+from .models import Products, Transactions
 
 
 class Processor:
@@ -42,11 +42,30 @@ class Processor:
         print([obj["name"] for obj in serialized_objects])
         return serialized_objects
 
-    # @staticmethod
-    # def instantiate_session(request):
-    #     if not request.session or not request.session.session_key:
-    #         request.session.save()
-    #         session_key = request.session.session_key
-    #         return session_key
-        
-    #     return request.session.session_key
+    @staticmethod
+    def _create_transaction_in_db(obj, status, kws):
+        print("timestamp", kws["timestamp"])
+        Transactions.objects.create (
+            user_email = kws["user_email"], 
+            product_id = obj["pk"], 
+            timestamp = kws["timestamp"], 
+            quantity = obj["cart_quantity"],
+            sum = (int(obj["cart_quantity"]) * int(obj["price"])),
+            status = status     
+            )
+
+    @staticmethod
+    def create_transactions(cart_objects, **kwargs):
+        status = kwargs["status"]
+
+        if status == "rejected":
+            for obj in cart_objects:
+                Processor._create_transaction_in_db(obj, status, kwargs)
+
+        else:
+            for obj in cart_objects:
+                print(obj)
+                Processor._create_transaction_in_db(obj, status, kwargs)
+                product = Products.objects.get(pk=obj["pk"])
+                product.quantity = int(product.quantity) - int(obj["cart_quantity"])
+                product.save()

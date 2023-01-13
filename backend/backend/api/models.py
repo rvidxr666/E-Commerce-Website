@@ -45,3 +45,29 @@ class Users(models.Model):
         managed = True
         db_table = 'users'
 
+    
+class Transactions(models.Model):
+    transaction_id = models.IntegerField(primary_key=True)
+    user_email = models.TextField(blank=True, null=True)
+    product_id = models.IntegerField(blank=True, null=True)
+    timestamp = models.DateTimeField(blank=True, null=True)
+    quantity = models.IntegerField(null=True, blank=True)
+    sum = models.IntegerField(null=True, blank=True)
+    status = models.CharField(blank=True, null=True, max_length=1)
+
+    class Meta:
+        managed = True
+        db_table = 'transactions'
+
+
+
+
+# CREATE TABLE IF NOT EXISTS ecommerce.transactions (
+#     transaction_id int NOT NULL AUTO_INCREMENT,
+#     user_email TEXT,
+#     product_id INT,
+#     timestamp TIMESTAMP,
+#     quantity INT, 
+#     status TEXT,
+#     CONSTRAINT TRANSACTION_KEY PRIMARY KEY (transaction_id)
+# );

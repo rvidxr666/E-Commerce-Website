@@ -34,3 +34,14 @@ CREATE TABLE IF NOT EXISTS ecommerce.users (
     birth_date DATE,
     CONSTRAINT CATEGORY_NAME PRIMARY KEY (email)
 );
+
+
+CREATE TABLE IF NOT EXISTS ecommerce.transactions (
+    transaction_id int NOT NULL AUTO_INCREMENT,
+    user_email TEXT,
+    product_id INT,
+    timestamp TIMESTAMP,
+    quantity INT, 
+    status TEXT,
+    CONSTRAINT TRANSACTION_KEY PRIMARY KEY (transaction_id)
+);

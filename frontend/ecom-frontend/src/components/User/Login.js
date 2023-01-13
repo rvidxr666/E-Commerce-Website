@@ -19,11 +19,10 @@ const Login = () => {
         if (status === "allowed") {
             setFlashMessage({"message":"You succesfully registered!", "color": "green"})
             navigate("/profile")
+            window.location.reload(false);
         } else {
             setFlashMessage({"message":"Email or password are incorrect!", "color": "red"})
         }
-
-        window.location.reload(false);
     }
 
 

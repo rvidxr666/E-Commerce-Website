@@ -30,6 +30,10 @@ const ShoppingCart = () => {
         refrestPage()
     }
 
+    const checkout = async () => {
+        await axios.get(`http://localhost:8000/checkout`) 
+    }
+
     useEffect(() => {
         fetchAPI()
     }, [])
@@ -70,7 +74,7 @@ const ShoppingCart = () => {
             <div className="row" style={{"paddingTop": "20px", "paddingBottom": "15px"}}>Cart Sum: {cartSum}$</div>
 
             <div className="row position-relative" style={{"padding-top": "15px", "padding-bottom": "40px"}}>
-                <button className="btn btn-success position-absolute bottom-0 end-0" type="button">Checkout</button>      
+                <button onClick={checkout} className="btn btn-success position-absolute bottom-0 end-0" type="button">Checkout</button>      
             </div>
 
 
