@@ -6,6 +6,7 @@ const ShoppingCart = () => {
 
     const [cartProducts, changeCartProducts] = useState([])
     const [cartSum, changeCartSum] = useState(0)
+    const [flashMessage, setFlashMessage] = useState({"message":null, "color": "red"})
       
     const fetchAPI = async () => {
         var resp = await axios.get("http://localhost:8000/cart")
@@ -31,7 +32,22 @@ const ShoppingCart = () => {
     }
 
     const checkout = async () => {
-        await axios.get(`http://localhost:8000/checkout`) 
+        let respUser = await axios.get(`http://localhost:8000/get-user`)
+        console.log(respUser.data.data)
+        if (respUser.data.data === "invalid") {
+            setFlashMessage({"message":"Please login before the checkout!", "color": "red"})
+            return
+        }
+
+       let respStatus = await axios.get(`http://localhost:8000/checkout`) 
+
+       if (respStatus.data.data === "insufficient funds") {
+            setFlashMessage({"message":"Insufficient Funds!", "color": "red"})
+            return
+       }
+
+       setFlashMessage({"message":"Success!", "color": "green"})
+
     }
 
     useEffect(() => {
@@ -71,7 +87,10 @@ const ShoppingCart = () => {
                 )
             })}
 
-            <div className="row" style={{"paddingTop": "20px", "paddingBottom": "15px"}}>Cart Sum: {cartSum}$</div>
+            <div className="row" style={{"paddingTop": "20px"}}>Cart Sum: {cartSum}$</div>
+
+
+            <div className="text-center mb-2" style={{color:flashMessage.color}}>{flashMessage.message}</div>
 
             <div className="row position-relative" style={{"padding-top": "15px", "padding-bottom": "40px"}}>
                 <button onClick={checkout} className="btn btn-success position-absolute bottom-0 end-0" type="button">Checkout</button>      

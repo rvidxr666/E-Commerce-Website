@@ -72,7 +72,7 @@ data = [{
         "quantity":3
     },
     {
-        "id": 8, 
+        "id": 12, 
         "name": "Ass Deck",
         "header": "8.5 Globe Deck", 
         "full_description": "Shit Cum",
@@ -81,27 +81,29 @@ data = [{
         "price": 300,
         "quantity": 3
     },
-    {
-        "id": 9, 
-        "name": "Bitch Deck",
-        "header": "8.5 Globe Deck", 
-        "full_description": "Globe Deck 8.5 size",
-        "header_image": "https://www.autopart.pl/images/catalog-category-big//catalog/category/27/7_5eafd8babd2d62_52116473.png.png",
+    {   
+        "id": 9,
+        "name": "122892 Mobil Delvac Synthetic Diesel 0W40 Oil, 3.78-L",
+        "header": "122892 Mobil Delvac Synthetic Diesel 0W40 Oil, 3.78-L", 
+        "full_description": "Mobil Delvac Synthetic Diesel",
+        "header_image": "https://cdn.shopify.com/s/files/1/2239/4255/products/0289938_1_1800x1800.jpg?v=1575678078",
         "category_id": "auto",
         "price": 300,
         "quantity": 3
     },
-    {
-        "id": 10, 
-        "name": "Bitch Deck",
-        "header": "8.5 Globe Deck", 
-        "full_description": "Shit Cum",
-        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
+    {   
+        "id": 10,
+        "name": "Adidas Puig Shoes",
+        "header": "Adidas Puig Shoes", 
+        "full_description": "Adidas Puig Shoes",
+        "header_image": "https://static.super-shop.com/1376661-undefined.jpg?w=960",
         "category_id": "clothing",
-        "price": 300,
+        "price": 96,
         "quantity": 3
     },
+
 ]
+
 
 
 categories = [
@@ -122,12 +124,6 @@ categories = [
                     "Clothes",
                     "https://blog.japanwondertravel.com/wp-content/uploads/2021/10/Japanese-clothing-store.jpg"
                 ), 
-
-                (
-                    "random",
-                    "random",
-                    "https://blog.japanwondertravel.com/wp-content/uploads/2021/10/Japanese-clothing-store.jpg"
-                )
     
              ]
 

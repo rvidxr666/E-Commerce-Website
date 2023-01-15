@@ -22,7 +22,7 @@ def getProducts(request):
         filtered_objects = Processor.filterByCategory(category=request.query_params.get('category_id'))
         return Response(filtered_objects)
 
-    products = Processor.serializeOutput(Products.objects.all())
+    products = Processor.serializeOutput(Products.objects.filter(quantity__gt=0))
     return Response(products)
 
 
@@ -52,8 +52,7 @@ def get_categories(request):
 @api_view(["GET", "POST"])
 def cart(request):
     cart = Cart(request)
-    # del request.session["shopping_cart"]
-
+    
     if request.method == "GET":
         cart_products = cart.cart
         cart_sum = cart.cart_sum()
@@ -78,15 +77,6 @@ def cart(request):
         # cart_product = CartProduct(request_data["id"], product_serialized, request_data["quantity"])
         cart.add(product_serialized)
         return Response("OK", status=status.HTTP_200_OK)
-    
-    # if request.method == "PUT":
-    #     if int(request_data["id"]) in cart.get_cart_ids():
-    #         cart.replace_existing(product_id, quantity)
-    #         return Response("OK", status=status.HTTP_200_OK)
-
-    # if request.method == "DELETE":
-    #     pass
-
 
 @api_view(["DELETE", "PUT"])
 def cart_modifications(request, **kwargs):
@@ -224,19 +214,6 @@ def checkout(request):
     cart.empty_cart()
     return Response({"data": "success"})
 
-
-
-
-
-# CREATE TABLE IF NOT EXISTS ecommerce.transactions (
-#     transaction_id int NOT NULL AUTO_INCREMENT,
-#     user_email TEXT,
-#     product_id INT,
-#     timestamp TIMESTAMP,
-#     quantity INT, 
-#     status TEXT,
-#     CONSTRAINT TRANSACTION_KEY PRIMARY KEY (transaction_id)
-# );
 
 
 
