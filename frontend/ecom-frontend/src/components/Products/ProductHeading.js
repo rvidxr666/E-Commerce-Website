@@ -2,12 +2,12 @@ import {Link} from 'react-router-dom'
 
 const ProductHeading = ({product}) => {
     return (
-        <div className="col-lg-3 col-md-6 mb-4">
+        <div className="col-lg-3 mb-4">
 
-        <div className="card">
+        <div className="card" style={{"width": "5px;"}}>
 
           <div className="view overlay">
-            <img src={product.header_image} height="400px" className="card-img-top" alt=""/>
+            <img src={product.header_image} className="card-img-top card-main" alt=""/>
             <Link state={product} to={`/products/${product.category_id}/${product.pk}`}>
               <div className="mask rgba-white-slight waves-effect waves-light"></div>
             </Link>

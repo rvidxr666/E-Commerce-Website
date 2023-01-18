@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS ecommerce;
-CREATE USER IF NOT EXISTS 'ecomm_user'@'172.17.0.1' IDENTIFIED BY 'ecomm_user';
-GRANT ALL PRIVILEGES ON ecommerce.* TO 'ecomm_user'@'172.17.0.1' WITH GRANT OPTION;
+CREATE USER IF NOT EXISTS 'ecomm_user'@'%' IDENTIFIED BY 'ecomm_user';
+GRANT ALL PRIVILEGES ON ecommerce.* TO 'ecomm_user'@'%' WITH GRANT OPTION;
 -- 'ecomm_user'@'localhost'
 
 CREATE TABLE IF NOT EXISTS ecommerce.products (
@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS ecommerce.transactions (
     product_id INT,
     timestamp TIMESTAMP,
     quantity INT, 
+    sum INT,
     status TEXT,
     CONSTRAINT TRANSACTION_KEY PRIMARY KEY (transaction_id)
 );

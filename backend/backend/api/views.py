@@ -149,7 +149,7 @@ def register(request):
 
 @api_view(["GET"])
 def check_session(request):
-    if request.session.get("user_email"):
+    if request.session and request.session.get("user_email"):
         return Response({"data":"logged"}, status=status.HTTP_200_OK)
     else:
         return Response({"data":"unlogged"}, status=status.HTTP_200_OK)

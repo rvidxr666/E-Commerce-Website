@@ -4,6 +4,7 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import './mdb.css'
 import './App.css'
 import './style.css'
+import './card.css'
 import { v4 as uuidv4 } from 'uuid';
 
 

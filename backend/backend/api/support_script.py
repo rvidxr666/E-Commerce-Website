@@ -13,76 +13,86 @@ data = [{
     }, 
     {
         "id": 2, 
-        "name": "Globe Deck",
-        "header": "8.5 Globe Deck", 
-        "full_description": "Globe Deck 8.5 size",
-        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
+        "name": "Bronson Bearings",
+        "header": "Bronson Bearings", 
+        "full_description": "very tight",
+        "header_image": "https://skateshop.pl/eng_pl_BRONSON-RAW-BEARINGS-1KPL-1152939644_1.jpg",
         "category_id": "skate",
-        "price": 300,
+        "price": 40,
         "quantity":3
     }, 
     {
         "id": 3, 
-        "name": "Globe Deck",
-        "header": "8.5 Globe Deck", 
-        "full_description": "Globe Deck 8.5 size",
-        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
+        "name": "Moondust Griptape",
+        "header": "Moondust Griptape", 
+        "full_description": "Don’t trip: the Moondust Grip Tape features geometric third eye graphics stamped across the top designed by ELEMENT’s very own art director, Bryan Arii. Developed with our decades of industry experience, this grip puts performance first.",
+        "header_image": "https://skateshop.pl/eng_pl_ELEMENT-Moondust-griptape-1152939863_1.jpg",
         "category_id": "skate",
-        "price": 300,
+        "price": 13.33,
         "quantity":3
     }, 
     {
         "id": 4, 
-        "name": "Globe Deck",
-        "header": "8.5 Globe Deck", 
-        "full_description": "Globe Deck 8.5 size",
-        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
+        "name": "8.5 Girl Deck",
+        "header": "8.5 Girl Deck", 
+        "full_description": "Girl Deck 8.5 size",
+        "header_image": "https://skateshop.pl/eng_pl_-1152940691_1.webp",
         "category_id": "skate",
         "price": 300,
         "quantity": 3
     }, 
-    {
-        "id": 5, 
-        "name": "Ass Deck",
-        "header": "8.5 Globe Deck", 
-        "full_description": "Globe Deck 8.5 size",
-        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
-        "category_id": "skate",
-        "price": 300,
-        "quantity":3
+    {   
+        "id": 5,
+        "name": "Adidas Puig Shoes",
+        "header": "Adidas Puig Shoes", 
+        "full_description": "Adidas Puig Shoes",
+        "header_image": "https://static.super-shop.com/1376661-undefined.jpg?w=960",
+        "category_id": "clothing",
+        "price": 96,
+        "quantity": 3
     },
-    {
-        "id": 6, 
-        "name": "Ass Deck",
-        "header": "8.5 Globe Deck", 
-        "full_description": "Shit Cum",
-        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
-        "category_id": "skate",
-        "price": 300,
-        "quantity":3
-    }, 
-        {
-        "id": 7, 
-        "name": "Ass Deck",
-        "header": "8.5 Globe Deck", 
-        "full_description": "Globe Deck 8.5 size",
-        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
-        "category_id": "skate",
-        "price": 300,
-        "quantity":3
+    {   
+        "id": 6,
+        "name": "Nervous Pants",
+        "header": "Nervous Pants", 
+        "full_description": "Loose pants from Nervous Strong Company in the style of Work Pants with additional elements to which you can attach the necessary tools.",
+        "header_image": "https://skateshop.pl/eng_pl_Nervous-Carpenter-Work-Green-Pants-1152940650_1.webp",
+        "category_id": "clothing",
+        "price": 111,
+        "quantity": 3
     },
-    {
-        "id": 12, 
-        "name": "Ass Deck",
-        "header": "8.5 Globe Deck", 
-        "full_description": "Shit Cum",
-        "header_image": "https://static.supersklep.pl/1118744-deck-globe-goodstock-black.jpg?w=1920",
-        "category_id": "skate",
-        "price": 300,
+    {   
+        "id": 7,
+        "name": "Thrasher Cap",
+        "header": "Thrasher Cap", 
+        "full_description": "Thrasher Cap",
+        "header_image": "https://skateshop.pl/eng_pl_-1152940569_1.webp",
+        "category_id": "clothing",
+        "price": 31,
+        "quantity": 3
+    },
+    {   
+        "id": 8,
+        "name": "Hoodie Thrasher",
+        "header": "Hoodie Thrasher", 
+        "full_description": "Hoodie Thrasher",
+        "header_image": "https://skateshop.pl/eng_pl_-1152940574_1.webp",
+        "category_id": "clothing",
+        "price": 86,
         "quantity": 3
     },
     {   
         "id": 9,
+        "name": "Vans Socks",
+        "header": "Vans Socks", 
+        "full_description": "Vans Socks",
+        "header_image": "https://skateshop.pl/eng_pl_VANS-Smartwool-Targeted-Cushion-grape-leaf-snowboard-socks-1152940263_1.jpg",
+        "category_id": "clothing",
+        "price": 23,
+        "quantity": 3
+    },
+    {   
+        "id": 10,
         "name": "122892 Mobil Delvac Synthetic Diesel 0W40 Oil, 3.78-L",
         "header": "122892 Mobil Delvac Synthetic Diesel 0W40 Oil, 3.78-L", 
         "full_description": "Mobil Delvac Synthetic Diesel",
@@ -92,16 +102,35 @@ data = [{
         "quantity": 3
     },
     {   
-        "id": 10,
-        "name": "Adidas Puig Shoes",
-        "header": "Adidas Puig Shoes", 
-        "full_description": "Adidas Puig Shoes",
-        "header_image": "https://static.super-shop.com/1376661-undefined.jpg?w=960",
-        "category_id": "clothing",
-        "price": 96,
+        "id": 11,
+        "name": "Motul Snowpower 2T",
+        "header": "Motul Snowpower 2T", 
+        "full_description": "Motul Snowpower 2T",
+        "header_image": "https://cdn.shopify.com/s/files/1/2239/4255/products/028-8760_539x833.png?v=1637793134",
+        "category_id": "auto",
+        "price": 52.99,
         "quantity": 3
     },
-
+    {   
+        "id": 12,
+        "name": "DXAE80CA DEWALT30A",
+        "header": "DXAE80CA DEWALT30A", 
+        "full_description": "DXAE80CA DEWALT30A",
+        "header_image": "https://cdn.shopify.com/s/files/1/2239/4255/products/0111922_1_22013c90-299c-40b6-8e33-39073f27f2bc_1800x1800.jpg?v=1575685056",
+        "category_id": "auto",
+        "price": 62.99,
+        "quantity": 3
+    },
+    {   
+        "id": 13,
+        "name": "0111983 NOCO",
+        "header": "0111983 NOCO", 
+        "full_description": "DXAE80CA DEWALT30A",
+        "header_image": "https://cdn.shopify.com/s/files/1/2239/4255/products/nocogenius5_1800x1800.png?v=1616074210",
+        "category_id": "auto",
+        "price": 96.99,
+        "quantity": 3
+    },
 ]
 
 
@@ -181,7 +210,7 @@ def delete_categories(curr, conn):
 
 if __name__ == "__main__":
     conn, curr = create_connection()
-    print(insert_data(curr, conn))
+    # print(insert_data(curr, conn))
     # print(insert_categories(curr, conn))
     # delete_data(curr, conn)
     # print(delete_categories(curr, conn))

@@ -10,7 +10,7 @@ const Products = () => {
 
     const [products, changeProducts] = useState([])
     const [currentPage, changeCurrentPage] = useState(1)
-    const productsPerPage = 4
+    const productsPerPage = 8
 
     const query = new URLSearchParams(useLocation().search);
 

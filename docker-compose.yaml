@@ -1,0 +1,44 @@
+services:
+  frontend-ecomm:
+    image: frontend-ecomm:latest
+    build: ./frontend/ecom-frontend
+    container_name: frontend-ecomm
+    ports:
+    - "80:80"
+    networks:
+      - backend-net
+
+  ecommerce-backend:
+    image: ecommerce-backend:latest
+    build: ./backend/backend
+    container_name: ecommerce-backend
+    ports:
+    - "8000:8000"
+    depends_on:
+      mysql_instance:
+        condition: service_healthy
+    networks:
+      - backend-net
+
+  mysql_instance:
+    image: mysql:latest
+    volumes:
+      - ./backend/backend/DB/data:/var/lib/mysql
+      - ./backend/backend/DB/startup_scripts:/docker-entrypoint-initdb.d
+    container_name: e-comm-mysql
+    ports: 
+    - "4321:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - backend-net
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+    
+networks:
+  backend-net:
+    name: backend-net
+    driver: bridge
